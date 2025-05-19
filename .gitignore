@@ -1,0 +1,65 @@
+# === MAVEN ===
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper-download.properties
+.mvn/jvm.config
+mvnw
+mvnw.cmd
+
+# === JAVA ===
+*.class
+*.log
+*.jar
+*.war
+*.ear
+hs_err_pid*.log
+replay_pid*.log
+
+# === IDE: IntelliJ IDEA ===
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+# IntelliJ local run/debug configs
+*.run.xml
+
+# === IDE: NetBeans ===
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+*.bak
+
+# === OS/GERAL ===
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# === LOMBOK (se estiver usando) ===
+.lombok/
+
+# === LOGS ou Arquivos de Configuração Temporários ===
+*.log
+*.tmp
+*.bak
+
+# === CONFIGS LOCAIS DE USUÁRIO ===
+*.env
+.env.local
+*.local.properties
+
+# === VSCODE (caso alguém use também) ===
+.vscode/
+
+# === JAVA 21 (preview features podem gerar metadados) ===
+/*.j21-preview-cache/
+
+# === TESTES OU DUMPS ===
+test-output/
