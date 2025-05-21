@@ -16,12 +16,8 @@ public class JogadorService {
     }
 
     public JogadorDTO criar(CriarJogadorDTO dto) {
-        Jogador jogador = new Jogador(dto.getNickname());
-        jogadorRepository.save(jogador);
-        JogadorDTO retorno = new JogadorDTO();
-        retorno.id = jogador.getId();
-        retorno.nickname = jogador.getNickname();
-        return retorno;
+        jogadorRepository.save(new Jogador(dto.getNickname()));
+        return new JogadorDTO(Objects.requireNonNull(this.jogadorRepository.findByNickname(dto.getNickname()).orElse(null)));
     }
 
     public boolean existe(String username) {
