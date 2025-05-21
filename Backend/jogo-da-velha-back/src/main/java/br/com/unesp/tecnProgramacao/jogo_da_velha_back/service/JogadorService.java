@@ -1,23 +1,39 @@
 package br.com.unesp.tecnProgramacao.jogo_da_velha_back.service;
 
-import br.com.unesp.tecnProgramacao.jogo_da_velha_back.domain.Jogador;
-import br.com.unesp.tecnProgramacao.jogo_da_velha_back.exceptions.JogadorException;
+import br.com.unesp.tecnProgramacao.jogo_da_velha_back.dto.*;
+import br.com.unesp.tecnProgramacao.jogo_da_velha_back.domain.*;
+import br.com.unesp.tecnProgramacao.jogo_da_velha_back.repository.*;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class JogadorService {
+    private final JogadorRepository jogadorRepository;
 
-    static public List<Jogador> jogadores;
-
-    public String getJogadores(List<Jogador> jogadoresList){
-        try{
-            jogadores = jogadoresList;
-            return "Jogadores recebidos com sucesso!";
-        }catch (Exception ex){
-            throw new JogadorException("Ocorreu um erro ao tentar receber os jogadores");
-        }
+    public JogadorService(JogadorRepository jogadorRepository) {
+        this.jogadorRepository = jogadorRepository;
     }
 
+    public JogadorDTO criar(CriarJogadorDTO dto) {
+        Jogador jogador = new Jogador(dto.getNickname());
+        jogadorRepository.save(jogador);
+        JogadorDTO retorno = new JogadorDTO();
+        retorno.id = jogador.getId();
+        retorno.nickname = jogador.getNickname();
+        return retorno;
+    }
+
+    public boolean existe(String username) {
+        return jogadorRepository.existsByNickname(username);
+    }
+
+    public JogadorDTO buscar(String username) {
+        Jogador jogador = jogadorRepository.findByNickname(username)
+                .orElseThrow(() -> new NoSuchElementException("Jogador não encontrado"));
+        JogadorDTO dto = new JogadorDTO();
+        dto.id = jogador.getId();
+        dto.nickname = jogador.getNickname();
+        return dto;
+    }
 }
