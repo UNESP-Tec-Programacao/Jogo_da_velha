@@ -2,6 +2,7 @@ package br.com.unesp.tecnProgramacao.jogo_da_velha_back.service;
 
 import br.com.unesp.tecnProgramacao.jogo_da_velha_back.dto.*;
 import br.com.unesp.tecnProgramacao.jogo_da_velha_back.domain.*;
+import br.com.unesp.tecnProgramacao.jogo_da_velha_back.exceptions.JogadorException;
 import br.com.unesp.tecnProgramacao.jogo_da_velha_back.repository.*;
 import org.springframework.stereotype.Service;
 
@@ -25,11 +26,8 @@ public class JogadorService {
     }
 
     public JogadorDTO buscar(String username) {
-        Jogador jogador = jogadorRepository.findByNickname(username)
-                .orElseThrow(() -> new NoSuchElementException("Jogador não encontrado"));
-        JogadorDTO dto = new JogadorDTO();
-        dto.id = jogador.getId();
-        dto.nickname = jogador.getNickname();
-        return dto;
+        return new JogadorDTO(this.jogadorRepository
+                .findByNickname(username)
+                .orElseThrow(() -> new JogadorException("Jogador não encontrado")));
     }
 }
