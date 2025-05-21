@@ -1,4 +1,5 @@
 package br.com.unesp.tecnProgramacao.jogo_da_velha_back.controller;
+
 import br.com.unesp.tecnProgramacao.jogo_da_velha_back.dto.*;
 import br.com.unesp.tecnProgramacao.jogo_da_velha_back.domain.Partida;
 import br.com.unesp.tecnProgramacao.jogo_da_velha_back.service.*;
@@ -16,6 +17,11 @@ public class PartidaController {
         this.partidaService = partidaService;
     }
 
+    @GetMapping
+    public ResponseEntity<List<Partida>> ler() {
+        return ResponseEntity.ok(partidaService.findAll());
+    }
+
     @PostMapping
     public ResponseEntity<Partida> criar(@RequestBody CriarPartidaDTO dto) {
         return ResponseEntity.ok(partidaService.criar(dto));
@@ -25,4 +31,20 @@ public class PartidaController {
     public ResponseEntity<Partida> atualizar(@PathVariable UUID id, @RequestBody AtualizarPartidaDTO dto) {
         return ResponseEntity.ok(partidaService.atualizarJogada(id, dto));
     }
+
+    @PutMapping("/{id}/entrar")
+    public ResponseEntity<Partida> entrarComoJogadorO(@PathVariable UUID id, @RequestParam UUID jogadorOId) {
+        return ResponseEntity.ok(partidaService.entrarComoJogadorO(id, jogadorOId));
+    }
+
+    @GetMapping("/em-aberto")
+    public ResponseEntity<List<Partida>> listarPartidasEmAberto() {
+        return ResponseEntity.ok(partidaService.buscarPartidasEmAberto());
+    }
+
+    @GetMapping("/{id}/tabuleiro")
+    public ResponseEntity<List<String>> obterTabuleiro(@PathVariable UUID id) {
+        return ResponseEntity.ok(partidaService.obterTabuleiro(id));
+    }
+
 }

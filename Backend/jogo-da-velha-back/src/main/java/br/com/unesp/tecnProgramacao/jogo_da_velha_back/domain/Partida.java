@@ -21,5 +21,19 @@ public class Partida {
     @ManyToOne
     @JoinColumn(name = "vencedor_id")
     private Jogador vencedor;
+    @ManyToOne
+    @JoinColumn()
+    private Jogador jogadorX;
+    @ManyToOne
+    @JoinColumn()
+    private Jogador jogadorO;
 
+    @ElementCollection
+    @CollectionTable(name = "partida_tabuleiro", joinColumns = @JoinColumn(name = "partida_id"))
+    @Column(name = "posicao")
+    private List<String> tabuleiro;
+
+    @ManyToOne
+    @JoinColumn(name = "vez_id")
+    private Jogador vez;
 }

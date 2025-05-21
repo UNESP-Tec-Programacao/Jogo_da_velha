@@ -17,6 +17,10 @@ public class JogadorController {
         this.jogadorService = jogadorService;
     }
 
+    @GetMapping
+    public ResponseEntity<List<Jogador>> ler() {
+        return ResponseEntity.ok(jogadorService.findAll());
+    }
     @PostMapping
     public ResponseEntity<JogadorDTO> criar(@RequestBody CriarJogadorDTO dto) {
         return ResponseEntity.ok(jogadorService.criar(dto));
