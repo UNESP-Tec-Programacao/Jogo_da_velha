@@ -16,6 +16,10 @@ public class JogadorService {
         this.jogadorRepository = jogadorRepository;
     }
 
+    public List<Jogador> findAll() {
+        return jogadorRepository.findAll();
+    }
+
     public JogadorDTO criar(CriarJogadorDTO dto) {
         jogadorRepository.save(new Jogador(dto.getNickname()));
         return new JogadorDTO(Objects.requireNonNull(this.jogadorRepository.findByNickname(dto.getNickname()).orElse(null)));
