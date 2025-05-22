@@ -28,6 +28,8 @@ public class Inicial extends javax.swing.JFrame {
 
         lbl_JogoDaVelha = new javax.swing.JLabel();
         btn_Jogar = new javax.swing.JButton();
+        txt_Usuario = new javax.swing.JTextField();
+        lbl_CriarConta = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -36,6 +38,23 @@ public class Inicial extends javax.swing.JFrame {
 
         btn_Jogar.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         btn_Jogar.setText("Iniciar Jogo");
+        btn_Jogar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_JogarActionPerformed(evt);
+            }
+        });
+
+        txt_Usuario.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        txt_Usuario.setText("Digite o seu usuário...");
+
+        lbl_CriarConta.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        lbl_CriarConta.setForeground(new java.awt.Color(51, 153, 255));
+        lbl_CriarConta.setText("Não possuo uma conta...");
+        lbl_CriarConta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_CriarContaMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -47,8 +66,13 @@ public class Inicial extends javax.swing.JFrame {
                         .addGap(212, 212, 212)
                         .addComponent(lbl_JogoDaVelha))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(275, 275, 275)
-                        .addComponent(btn_Jogar)))
+                        .addGap(234, 234, 234)
+                        .addComponent(txt_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(249, 249, 249)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_CriarConta)
+                            .addComponent(btn_Jogar, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(245, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -56,14 +80,35 @@ public class Inicial extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(lbl_JogoDaVelha)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 305, Short.MAX_VALUE)
+                .addGap(78, 78, 78)
+                .addComponent(txt_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
                 .addComponent(btn_Jogar)
-                .addGap(82, 82, 82))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_CriarConta)
+                .addGap(36, 36, 36))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_JogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_JogarActionPerformed
+        String user = txt_Usuario.getText();
+        System.out.println(user);
+        Jogo jogo = new Jogo();
+        jogo.setVisible(true);
+        jogo.setResizable(false);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_JogarActionPerformed
+
+    private void lbl_CriarContaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_CriarContaMouseClicked
+        //System.out.println("Problema seu");
+        this.setContentPane(new CriarConta());
+        this.revalidate();
+        this.repaint();
+    }//GEN-LAST:event_lbl_CriarContaMouseClicked
+
+    
     /**
      * @param args the command line arguments
      */
@@ -101,6 +146,8 @@ public class Inicial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Jogar;
+    private javax.swing.JLabel lbl_CriarConta;
     private javax.swing.JLabel lbl_JogoDaVelha;
+    private javax.swing.JTextField txt_Usuario;
     // End of variables declaration//GEN-END:variables
 }
