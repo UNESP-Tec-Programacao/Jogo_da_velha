@@ -16,7 +16,6 @@ public class PartidaController {
     public PartidaController(PartidaService partidaService) {
         this.partidaService = partidaService;
     }
-
     @GetMapping
     public ResponseEntity<List<Partida>> ler() {
         return ResponseEntity.ok(partidaService.findAll());
@@ -46,5 +45,6 @@ public class PartidaController {
     public ResponseEntity<List<String>> obterTabuleiro(@PathVariable UUID id) {
         return ResponseEntity.ok(partidaService.obterTabuleiro(id));
     }
+
 
 }

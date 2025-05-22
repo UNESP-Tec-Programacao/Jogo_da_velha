@@ -6,6 +6,10 @@ import br.com.unesp.tecnProgramacao.jogo_da_velha_back.dto.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
@@ -34,14 +38,16 @@ public class PartidaService {
         partida.setTabuleiro(dto.tabuleiro);
         partida.setVencedor(null);
         partida.setVez(jogadorX); // jogador X sempre começa
+        partida.setJogadorX(jogadorX);
+        partida.setTabuleiro(   dto.tabuleiro);
+
+        if (dto.vencedorId != null) {
+            Jogador vencedor = jogadorRepository.findById(dto.vencedorId)
+                    .orElseThrow(() -> new NoSuchElementException("Vencedor não encontrado"));
+            partida.setVencedor(vencedor);
+        }
 
         return partidaRepository.save(partida);
-    }
-
-    public List<String> obterTabuleiro(UUID id) {
-        Partida partida = partidaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Partida não encontrada"));
-        return partida.getTabuleiro();
     }
 
     public Partida entrarComoJogadorO(UUID partidaId, UUID jogadorOId) {
@@ -64,6 +70,11 @@ public class PartidaService {
     }
 
 
+    public List<String> obterTabuleiro(UUID id) {
+        Partida partida = partidaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Partida não encontrada"));
+        return partida.getTabuleiro();
+    }
     public Partida atualizarJogada(UUID id, AtualizarPartidaDTO dto) {
         Partida partida = partidaRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Partida não encontrada"));
